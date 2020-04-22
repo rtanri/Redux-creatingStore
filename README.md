@@ -1,0 +1,1 @@
+This is a basic REDUX that consist of State tree, Actions event, Pure functions and Dispacth

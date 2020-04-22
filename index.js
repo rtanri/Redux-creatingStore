@@ -25,6 +25,8 @@ function createStore(){
     }
 }
 
+//ACTION Creator - record as a function that create/return action object
+const todo = todo =>(
 {
     type: "ADD_TODO"  //type - let REDUX know exactly what event took place
     todo: {
@@ -32,7 +34,7 @@ function createStore(){
         name: 'Learn Redux',
         complete: false
     }
-}
+});
 
 {
     type:"REMOVE_TODO"
