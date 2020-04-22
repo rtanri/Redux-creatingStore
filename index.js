@@ -1,3 +1,12 @@
+//REDUCER: PURE FUNCTION that import action and reducing that to a brand new state.
+function todos (state=[], action) {
+    if(action.type === 'ADD_TODO'){
+        return state.concat([action.todo])
+    }
+    return state
+}
+
+
 function createStore(){
 // the store should have 4 parts:
 // 1. the state
@@ -26,35 +35,36 @@ function createStore(){
 }
 
 //ACTION Creator - record as a function that create/return action object
-const todo = todo =>(
-{
-    type: "ADD_TODO"  //type - let REDUX know exactly what event took place
-    todo: {
-        id: 0,
-        name: 'Learn Redux',
-        complete: false
-    }
-});
+const action = todo =>(
+    {
+        type: "ADD_TODO",  //type - let REDUX know exactly what event took place
+        todo: {
+            id: 0,
+            name: 'Learn Redux',
+            complete: false
+        }
+    },
 
-{
-    type:"REMOVE_TODO"
-    id:0
-}
+    {
+        type:"REMOVE_TODO",
+        id:0
+    },
 
-{
-    type: "TOGGLE_TODO"
-    id: 0
-}
+    {
+        type: "TOGGLE_TODO",
+        id: 0
+    },
 
-{
-    type: "ADD_GOAL"
-    goal: {
-        id: 0,
-        name: "Run a Marathon",
-    }
-}
+    {
+        type: "ADD_GOAL",
+        goal: {
+            id: 0,
+            name: "Run a Marathon",
+        }
+    },
 
-{
-    type: "REMOVE_GOAL"
-    id:0
-}
+    {
+        type: "REMOVE_GOAL",
+        id:0
+    } 
+);
