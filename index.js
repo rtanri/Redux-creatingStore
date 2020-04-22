@@ -1,9 +1,12 @@
-//REDUCER: PURE FUNCTION that import action and reducing that to a brand new state.
+//REDUCER: PURE FUNCTION that import state & action, then reducing that to a brand new state.
+//first this function invoked, 'state' is undefined, that's why we put 'state=[]'
 function todos (state=[], action) {
     if(action.type === 'ADD_TODO'){
         return state.concat([action.todo])
     }
-    return state
+
+
+    return state //brand new state created by REDUCER
 }
 
 
