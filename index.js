@@ -10,6 +10,7 @@ function todos (state=[], action) {
 }
 
 
+
 function createStore(){
 // the store should have 4 parts:
 // 1. the state
@@ -30,12 +31,21 @@ function createStore(){
         }
     }
 
+    //Dispatch can pass 'state' and 'action' to the PureFunction(todo).
+    const dispatch = (action) => {
+        state = todos(state, action) //call the PURE Function
+        listeners.forEach((listener) => listener())
+    }
+
     // Whenever the invoke createStore(), they get an object back with return.
     return {
         getState,
-        subscribe
+        subscribe,
+        dispatch, //when you put 'dispatch' here, when you call createStore() - it will auto call dispatch
     }
 }
+
+
 
 //ACTION Creator - record as a function that create/return action object
 const action = todo =>(
