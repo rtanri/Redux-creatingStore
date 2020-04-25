@@ -153,6 +153,9 @@
             //Change the "Nre state is"
             const { goals, todos } = store.getState()
 
+            document.getElementById('goals').innerHTML= ''
+            document.getElementById('todos').innerHTML = ''
+
             goals.forEach(addGoalToDOM)
             todos.forEach(addTodoToDOM)
         })
