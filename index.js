@@ -39,16 +39,16 @@ function createStore(reducer){
 //REDUCER: PURE FUNCTION that import state & action, then reducing that to a brand new state.
 //first this function invoked, 'state' is undefined, that's why we put 'state=[]'
 function todos (state=[], action) {
-    if(action.type === 'ADD_TODO'){
-        return state.concat([action.todo])
-    } else if ( action.type === 'REMOVE_TODO' ) { //filter out state with action.id
-        return state.filter((todo) => todo.id != action.id)
-    } 
-    else if ( action.type === 'TOGGLE_TODO' ) {
-        return state.map((todo) => todo.id != action.id ? todo :  //for those with diff id, just map the same content, 
-            Object.assign({}, todo, {complete: !todo.complete})) //but for the same id with action.id, 'Object.assign' to change 'todo.complete'
-    } else {
-        return state //brand new state created by REDUCER
+    switch (action.type) {
+        case 'ADD_TODO':
+            return state.concat([action.todo])
+        case 'REMOVE_TODO':
+            return state.filter((todo) => todo.id != action.id)
+        case 'TOGGLE_TODO':
+            return state.map((todo) => todo.id != action.id ? todo : 
+                Object.assign({}, todo, {complete: !todo.complete}))
+        default:
+            return state
     }
 
 }
