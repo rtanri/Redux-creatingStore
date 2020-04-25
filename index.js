@@ -46,6 +46,14 @@ function todos (state=[], action) {
     return state //brand new state created by REDUCER
 }
 
+const store = createStore(todos)
+store.subscribe(() => {
+    console.log('The new state is: ', store.getState())
+})
+
+store.dispatch({
+    
+})
 
 
 //ACTION Creator - record as a function that create/return action object
