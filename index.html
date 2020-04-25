@@ -151,8 +151,15 @@
  
         store.subscribe(() => {
             console.log('The new state is: ', store.getState())
+
+            goals.forEach(addGoalToDOM)
+            todos.forEach(addTodoToDOM)
         })
 
+
+
+
+        //DOM Code
         function addTodo () {
             //Grab the value of input, empty the value of input, and Add-to dispatch
             const input = document.getElementById('todo')
@@ -163,6 +170,7 @@
                 name,
                 complete:true,
                 id: generateId()
+                //these all props are under name 'todo'
             }))
 
 
@@ -185,6 +193,23 @@
         //Attach addGoal() and addTodo() to buttons
         document.getElementById('todoBtn').addEventListener('click', addTodo)
         document.getElementById('goalBtn').addEventListener('click', addGoal)
+
+        function addTodoToDOM(todo) {
+            const node = document.createElement('li')
+            const text = document.createTextNode(todo.name)
+            node.appendChild(text);
+
+            document.getElementById('todos').appendChild(node)
+        }
+
+        function addGoalToDOM(goal){
+            const node = document.createElement('li')
+            const text = document.createTextNode(goal.name)
+            node.appendChild(text)
+
+            document.getElementById('goals').appendChild(node)
+        }
+
 
 
     </script>
