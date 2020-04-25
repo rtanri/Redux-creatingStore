@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
     <title>Udacity Todos Goals</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.7.2/redux.min.js"></script>
 </head>
 <body>
 
@@ -26,40 +27,6 @@
             return Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);
         }
                 
-                //1. This is library code.
-        function createStore(reducer){
-            // the store should have 4 parts:
-            // 1. the state
-            // 2. Get the State - return the state - getState
-            // 3. Listen to change on the state - subscribe
-            // 4. Update the state
-            
-                let state  //undefined state
-                let listeners =[]
-            
-                // Create a way to get access to (1) stage
-                const getState = () => state
-            
-                const subscribe =(listener) => {
-                    listeners.push(listener)
-                    return () => {
-                        listeners = listener.filter((l) => l !== listener)
-                    }
-                }
-            
-                //Dispatch can pass 'state' and 'action' to the PureFunction(todo).
-                const dispatch = (action) => {
-                    state = reducer(state, action) //call the PURE Function
-                    listeners.forEach((listener) => listener())
-                }
-            
-                // Whenever the invoke createStore(), they get an object back with return.
-                return {
-                    getState,
-                    subscribe,
-                    dispatch, //when you put 'dispatch' here, when you call createStore() - it will auto call dispatch
-                }
-            }
             
 
 
@@ -146,7 +113,7 @@
         }
 
 
-        const store = createStore(app) //pass-in Root Reducer
+        const store = Redux.createStore(app) //pass-in Root Reducer
 
  
         store.subscribe(() => {
@@ -235,7 +202,8 @@
         function addGoalToDOM(goal){
             const node = document.createElement('li')
             const text = document.createTextNode(goal.name)
-            const removebtn = document.createRemoveButton(() => {
+
+            const removeBtn = createRemoveButton(() => {
                 store.dispatch(removeGoalAction(goal.id))
             })
 
