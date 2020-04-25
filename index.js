@@ -52,41 +52,45 @@ store.subscribe(() => {
 })
 
 store.dispatch({
-    
-})
-
+    type:'ADD_TODO',
+    todo: {
+        id: 0,
+        name: 'Learn Redux',
+        complete: false
+    }
+}) 
 
 //ACTION Creator - record as a function that create/return action object
-const action = todo =>(
-    {
-        type: "ADD_TODO",  //type - let REDUX know exactly what event took place
-        todo: {
-            id: 0,
-            name: 'Learn Redux',
-            complete: false
-        }
-    },
+// const action = todo =>(
+//     {
+//         type: "ADD_TODO",  //type - let REDUX know exactly what event took place
+//         todo: {
+//             id: 0,
+//             name: 'Learn Redux',
+//             complete: false
+//         }
+//     },
 
-    {
-        type:"REMOVE_TODO",
-        id:0
-    },
+//     {
+//         type:"REMOVE_TODO",
+//         id:0
+//     },
 
-    {
-        type: "TOGGLE_TODO",
-        id: 0
-    },
+//     {
+//         type: "TOGGLE_TODO",
+//         id: 0
+//     },
 
-    {
-        type: "ADD_GOAL",
-        goal: {
-            id: 0,
-            name: "Run a Marathon",
-        }
-    },
+//     {
+//         type: "ADD_GOAL",
+//         goal: {
+//             id: 0,
+//             name: "Run a Marathon",
+//         }
+//     },
 
-    {
-        type: "REMOVE_GOAL",
-        id:0
-    } 
-);
+//     {
+//         type: "REMOVE_GOAL",
+//         id:0
+//     } 
+// );
