@@ -150,7 +150,8 @@
 
  
         store.subscribe(() => {
-            console.log('The new state is: ', store.getState())
+            //Change the "Nre state is"
+            const { goals, todos } = store.getState()
 
             goals.forEach(addGoalToDOM)
             todos.forEach(addTodoToDOM)
@@ -197,7 +198,7 @@
         function addTodoToDOM(todo) {
             const node = document.createElement('li')
             const text = document.createTextNode(todo.name)
-            node.appendChild(text);
+            node.appendChild(text)
 
             document.getElementById('todos').appendChild(node)
         }
