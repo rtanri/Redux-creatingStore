@@ -134,7 +134,8 @@
         const store = Redux.createStore(Redux.combineReducers({
             todos,
             goals,
-        })) //pass-in Objects and combine them as combineReducers
+        }), Redux.applyMiddleware(checker))
+        //create applyMiddleware as a 2nd Argument in the store state.
 
  
         store.subscribe(() => {
