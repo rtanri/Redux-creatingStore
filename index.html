@@ -101,33 +101,25 @@
 
 
         //Write this alert here to pop-up before redux.combineReducers
-        //with Middleware
+        //with Middleware and arrowFunction
 
-        
-        function checker(store) {
-            return function (next) { //'next' will be the next middleware for multiple middleware-case, or dispatch
-                return function (action) {
-                    if ( 
-                        action.type === ADD_TODO &&
-                        action.todo.name.toLowerCase().includes('bitcoin')
-                    ){
-                        return alert("Nope. that's a bad idea.")
-                    }
-                
-                    if (
-                        action.type === ADD_GOAL &&
-                        action.goal.name.toLowerCase().includes('bitcoin')
-                    ){
-                        return alert("Nope. that's a bad idea.")
-                    }
-
-                    return next(action)
-                }
+        const checker = (store) => (next) => (action) => {
+            if ( 
+                action.type === ADD_TODO &&
+                action.todo.name.toLowerCase().includes('bitcoin')
+            ){
+                return alert("Nope. that's a bad idea.")
             }
+        
+            if (
+                action.type === ADD_GOAL &&
+                action.goal.name.toLowerCase().includes('bitcoin')
+            ){
+                return alert("Nope. that's a bad idea.")
+            }
+
+            return next(action)
         }
-
-
-
 
 
         //Delete root-reducer, change to Redux.combineReducers
