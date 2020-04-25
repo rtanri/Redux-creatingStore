@@ -6,7 +6,7 @@ function createStore(reducer){
     // 3. Listen to change on the state - subscribe
     // 4. Update the state
     
-        let state 
+        let state  //undefined state
         let listeners =[]
     
         // Create a way to get access to (1) stage
@@ -65,7 +65,16 @@ function goals (state = [], action){
 }
 
 
-const store = createStore(todos)
+//Root Reducer, when app first called with undefined state, we make it as an empty object
+function app(state = {}, action) {
+    return {
+        todos: todos(state.todos, action),
+        goals: goals(state.goals, action), //call in reducer and state of action
+    } //we return app() an object, instead of array
+}
+
+
+const store = createStore(app) //pass-in Root Reducer
 
 
 store.subscribe(() => {
