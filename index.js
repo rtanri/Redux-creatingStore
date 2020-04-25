@@ -34,16 +34,23 @@ function createStore(reducer){
     }
     
 
+
 //2. This is App Code
 //REDUCER: PURE FUNCTION that import state & action, then reducing that to a brand new state.
 //first this function invoked, 'state' is undefined, that's why we put 'state=[]'
 function todos (state=[], action) {
     if(action.type === 'ADD_TODO'){
         return state.concat([action.todo])
+    } else if ( action.type === 'REMOVE_TODO' ) { //filter out state with action.id
+        return state.filter((todo) => todo.id != action.id)
+    } 
+    else if ( action.type === 'TOGGLE_TODO' ) {
+        return state.map((todo) => todo.id != action.id ? todo :  //for those with diff id, just map the same content, 
+            Object.assign({}, todo, {complete: !todo.complete})) //but for the same id with action.id, 'Object.assign' to change 'todo.complete'
+    } else {
+        return state //brand new state created by REDUCER
     }
 
-
-    return state //brand new state created by REDUCER
 }
 
 const store = createStore(todos)
@@ -51,46 +58,15 @@ store.subscribe(() => {
     console.log('The new state is: ', store.getState())
 })
 
-store.dispatch({
+store.dispatch(
+
+    {
     type:'ADD_TODO',
     todo: {
         id: 0,
         name: 'Learn Redux',
         complete: false
     }
-}) 
+    }
 
-//ACTION Creator - record as a function that create/return action object
-// const action = todo =>(
-//     {
-//         type: "ADD_TODO",  //type - let REDUX know exactly what event took place
-//         todo: {
-//             id: 0,
-//             name: 'Learn Redux',
-//             complete: false
-//         }
-//     },
-
-//     {
-//         type:"REMOVE_TODO",
-//         id:0
-//     },
-
-//     {
-//         type: "TOGGLE_TODO",
-//         id: 0
-//     },
-
-//     {
-//         type: "ADD_GOAL",
-//         goal: {
-//             id: 0,
-//             name: "Run a Marathon",
-//         }
-//     },
-
-//     {
-//         type: "REMOVE_GOAL",
-//         id:0
-//     } 
-// );
+) 
