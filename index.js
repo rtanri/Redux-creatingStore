@@ -126,33 +126,33 @@ store.subscribe(() => {
 })
 
 
-store.dispatch(addTodoAction({
-    id: 0,
-    name: 'Read books',
-    complete: true,
-})) 
+// store.dispatch(addTodoAction({
+//     id: 0,
+//     name: 'Read books',
+//     complete: true,
+// })) 
 
 
-store.dispatch(addTodoAction({
-    id: 1,
-    name: 'Wash the car',
-    complete: false,
-})) 
+// store.dispatch(addTodoAction({
+//     id: 1,
+//     name: 'Wash the car',
+//     complete: false,
+// })) 
 
-store.dispatch(removeTodoAction(1))
+// store.dispatch(removeTodoAction(1))
 
-store.dispatch(toggleTodoAction(0))
+// store.dispatch(toggleTodoAction(0))
 
-store.dispatch(addGoalAction({
-    id: 0,
-    name: 'Learn Redux'
-}))
+// store.dispatch(addGoalAction({
+//     id: 0,
+//     name: 'Learn Redux'
+// }))
 
-store.dispatch(addGoalAction({
-    id: 1,
-    name: 'Lose 20 pounds'
-}))
+// store.dispatch(addGoalAction({
+//     id: 1,
+//     name: 'Lose 20 pounds'
+// }))
 
-store.dispatch(removeGoalAction(1))
+// store.dispatch(removeGoalAction(1))
 
 
