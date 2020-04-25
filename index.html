@@ -172,7 +172,7 @@
 
             store.dispatch(addTodoAction({
                 name,
-                complete:true,
+                complete:false,
                 id: generateId()
                 //these all props are under name 'todo'
             }))
@@ -198,13 +198,21 @@
         document.getElementById('todoBtn').addEventListener('click', addTodo)
         document.getElementById('goalBtn').addEventListener('click', addGoal)
 
+
         function addTodoToDOM(todo) {
             const node = document.createElement('li')
             const text = document.createTextNode(todo.name)
             node.appendChild(text)
 
+            node.style.textDecoration = todo.complete ? 'line-through' : 'none'
+
+            node.addEventListener("click", () => {
+                store.dispatch(toggleTodoAction(todo.id))
+            })
+
             document.getElementById('todos').appendChild(node)
         }
+
 
         function addGoalToDOM(goal){
             const node = document.createElement('li')
