@@ -104,16 +104,12 @@
         }
 
 
-        //Root Reducer, when app first called with undefined state, we make it as an empty object
-        function app(state = {}, action) {
-            return {
-                todos: todos(state.todos, action),
-                goals: goals(state.goals, action), //call in reducer and state of action
-            } //we return app() an object, instead of array
-        }
 
-
-        const store = Redux.createStore(app) //pass-in Root Reducer
+        //Delete root-reducer, change to Redux.combineReducers
+        const store = Redux.createStore(Redux.combineReducers({
+            todos,
+            goals,
+        })) //pass-in Objects and combine them as combineReducers
 
  
         store.subscribe(() => {
