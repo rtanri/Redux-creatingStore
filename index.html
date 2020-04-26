@@ -118,6 +118,14 @@
                 return alert("Nope. that's a bad idea.")
             }
 
+            if (action.type === ADD_GOAL){
+                return alert("That's a great goal!")
+            }
+
+            if (action.type === ADD_TODO) {
+                return alert(`Don't forget to ${action.todo.name} !`)
+            }
+
             return next(action)
         }
 
