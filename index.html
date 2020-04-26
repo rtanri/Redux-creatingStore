@@ -121,12 +121,20 @@
             return next(action)
         }
 
+        //Logger middleware
+        const logger = (store) => (next) => (action) => {
+            console.group(action.type)
+                console.log('The action: ', action)
+                const result = next(action)
+                console.log('The new state: ', store.getState())
+            console.groupEnd()
+        }
 
         //Delete root-reducer, change to Redux.combineReducers
         const store = Redux.createStore(Redux.combineReducers({
             todos,
             goals,
-        }), Redux.applyMiddleware(checker))
+        }), Redux.applyMiddleware(checker, logger))
         //create applyMiddleware as a 2nd Argument in the store state.
 
  
