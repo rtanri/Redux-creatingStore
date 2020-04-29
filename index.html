@@ -123,15 +123,6 @@
             ){
                 return alert("Nope. that's a bad idea.")
             }
-
-            if (action.type === ADD_GOAL){
-                return alert("That's a great goal!")
-            }
-
-            if (action.type === ADD_TODO) {
-                return alert(`Don't forget to ${action.todo.name} !`)
-            }
-
             return next(action)
         }
 
@@ -173,14 +164,12 @@
             input.value = ''
 
             //Setting this as props, make code up a little but better when we start refactoring.
-            this.props.store.dispatch(addTodoAction({
+            store.dispatch(addTodoAction({
                 name,
                 complete:false,
                 id: generateId()
                 //these all props are under name 'todo'
             }))
-
-
         }
 
 
@@ -202,14 +191,14 @@
         document.getElementById('goalBtn').addEventListener('click', addGoal)
 
 
-                //Function to create REMOVE Button -- read throu this
-                function createRemoveButton(onClick){
-                    const removeBtn = document.createElement ('button')
-                    removeBtn.innerHTML = 'x'
-                    removeBtn.style.marginLeft = '30px'
-                    removeBtn.addEventListener('click', onClick)
-                    return removeBtn
-                }
+        //Function to create REMOVE Button -- read throu this
+        function createRemoveButton(onClick){
+            const removeBtn = document.createElement ('button')
+            removeBtn.innerHTML = 'x'
+            removeBtn.style.marginLeft = '30px'
+            removeBtn.addEventListener('click', onClick)
+            return removeBtn
+        }
 
 
 
@@ -217,9 +206,9 @@
             const node = document.createElement('li')
             const text = document.createTextNode(todo.name)
 
-                const removeBtn = createRemoveButton(() => {
-                    store.dispatch(removeTodoAction(todo.id))
-                })
+            const removeBtn = createRemoveButton(() => {
+                store.dispatch(removeTodoAction(todo.id))
+            })
 
 
             node.appendChild(text)
@@ -246,7 +235,7 @@
             node.appendChild(text)
             node.appendChild(removeBtn)
 
-            document.getElementById('goals').appendChild(node)
+            document.getElementById('goals').append(node)
         }
     </script>
 
@@ -260,10 +249,18 @@
         }
 
         class Todos extends React.Component {
+            //to receive an event in onClick button "Add Todo"
             addItem =(e) => {
                 e.preventDefault()
                 const name = this.input.value
                 this.input.value= ''
+
+            
+            this.props.store.dispatch(addTodoAction({
+                name,
+                complete:false,
+                id: generateId()
+            }))
 
             }
             render() {
@@ -273,6 +270,7 @@
                         <input
                             type='text'
                             placeholder='Add Todo'
+                            //ref show this as uncontrolled components
                             ref={(input) => this.input = input }
                         />
 
