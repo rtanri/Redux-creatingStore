@@ -172,7 +172,8 @@
             const name = input.value
             input.value = ''
 
-            store.dispatch(addTodoAction({
+            //Setting this as props, make code up a little but better when we start refactoring.
+            this.props.store.dispatch(addTodoAction({
                 name,
                 complete:false,
                 id: generateId()
@@ -259,11 +260,23 @@
         }
 
         class Todos extends React.Component {
+            addItem =(e) => {
+                e.preventDefault()
+                const name = this.input.value
+                this.input.value= ''
+
+            }
             render() {
                 return(
                     <div>
-                        TODOS
+                        <h1>Todo List</h1>
+                        <input
+                            type='text'
+                            placeholder='Add Todo'
+                            ref={(input) => this.input = input }
+                        />
 
+                        <button onClick={this.addItem}> Add Todo </button>
                         <List />
                     </div> 
                 )
@@ -287,7 +300,7 @@
             render(){
                 return(
                     <div>
-                        <Todos />
+                        <Todos store={this.props.store} />
                         <Goals />   
                     </div>
                 )
@@ -295,7 +308,7 @@
         }
 
         ReactDOM.render(
-            <App />,
+            <App store={store} />,
             document.getElementById('app')
         )
     </script>
