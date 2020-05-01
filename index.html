@@ -22,62 +22,58 @@
         <button id='goalBtn'>Add Goal</button>
         <ul id='goals'></ul>
     </div>
-    <script type="text/javascript" src="index.js"></script>
-
+   
     <hr style="margin: 3em 20% 3em auto;">
-
     <!--    -------------------     div to mount REACT      -------------       -->
     <div id='app'></div>
-
+    <script type="text/javascript" src="index.js"></script>
 
     <script type="text/babel">
-        
-        function List(props){ //to create List in react
-            return(
+        function List (props) {
+            return (
                 <ul>
-                    <li>LIST</li>
+                    <li> List </li>
                 </ul>
             )
         }
 
-        class Todos extends React.component {
-            render(){
-                return (
-                    <div>
-                        TODOS
 
-                        <List />
-                    </div>
-                )}
-        }
-
-        class Goals extends React.component {
+        class Todos extends React.Component {
             render(){
-                return (
-                    <div>
-                        GOALS
-                        
-                        <List />
-                    </div>
-                )}
+                return(
+                <div>
+                    <h2> Todo List </h2>
+                    <List />
+                </div>
+                )
+            }
         }
 
 
+        class Goals extends React.Component {
+            render(){
+                return(
+                <div>
+                    <h2> Goal List </h2>
+                    <List />
+                </div>
+                )
+            }
+        }
 
 
         class App extends React.Component {
             render(){
                 return(
                     <div>
-                        APP
+                        <Todos />
+                        <Goals />
                     </div>
                 )}}
+
         ReactDOM.render(
-            <App />, 
-            document.getElementById("app")
+            <App />, document.getElementById('app')
         )
-
-
     </script>
 
 </body>
