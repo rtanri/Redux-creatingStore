@@ -22,8 +22,63 @@
         <button id='goalBtn'>Add Goal</button>
         <ul id='goals'></ul>
     </div>
-    <script type="text/javascript" src="index.js">
+    <script type="text/javascript" src="index.js"></script>
+
+    <hr style="margin: 3em 20% 3em auto;">
+
+    <!--    -------------------     div to mount REACT      -------------       -->
+    <div id='app'></div>
+
+
+    <script type="text/babel">
         
+        function List(props){ //to create List in react
+            return(
+                <ul>
+                    <li>LIST</li>
+                </ul>
+            )
+        }
+
+        class Todos extends React.component {
+            render(){
+                return (
+                    <div>
+                        TODOS
+
+                        <List />
+                    </div>
+                )}
+        }
+
+        class Goals extends React.component {
+            render(){
+                return (
+                    <div>
+                        GOALS
+                        
+                        <List />
+                    </div>
+                )}
+        }
+
+
+
+
+        class App extends React.Component {
+            render(){
+                return(
+                    <div>
+                        APP
+                    </div>
+                )}}
+        ReactDOM.render(
+            <App />, 
+            document.getElementById("app")
+        )
+
+
     </script>
+
 </body>
 </html>
