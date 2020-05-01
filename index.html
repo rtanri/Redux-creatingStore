@@ -39,10 +39,30 @@
 
 
         class Todos extends React.Component {
+            addItem = (e) => {
+                e.preventDefault()
+                const name = this.input.value
+                this.input.value = ''
+
+
+            this.props.store.dispatch(addTodoAction({
+                name,
+                complete: false,
+                id: generateId()
+                }))
+            }
+
             render(){
                 return(
                 <div>
                     <h2> Todo List </h2>
+                    <input 
+                        type = 'text'
+                        placeholder = 'Enter here..'
+                        ref = {(input) => this.input = input}
+                    />
+
+                    <button onClick = {this.addItem}>Add Todo</button>
                     <List />
                 </div>
                 )
@@ -51,10 +71,29 @@
 
 
         class Goals extends React.Component {
+            addItem = (e) => {
+                e.preventDefault()
+                const name = this.input.value
+                this.input.value = ''
+
+                this.props.store.dispatch(addGoalAction({
+                    id: generateId(),
+                    name,
+                }))
+            }
+
+
             render(){
                 return(
                 <div>
                     <h2> Goal List </h2>
+                    <input 
+                        type = 'text'
+                        placeholder = 'Enter here..'
+                        ref = {(input)=> this.input = input}
+                    />
+                    <button onClick = {this.addItem}>Add Goal</button>
+
                     <List />
                 </div>
                 )
@@ -66,13 +105,13 @@
             render(){
                 return(
                     <div>
-                        <Todos />
-                        <Goals />
+                        <Todos store={this.props.store}/>
+                        <Goals store={this.props.store}/>
                     </div>
                 )}}
 
         ReactDOM.render(
-            <App />, document.getElementById('app')
+            <App store={store}/>, document.getElementById('app')
         )
     </script>
 
