@@ -1,3 +1,5 @@
+// Delete the JAVASCRIPT CODE
+
 function generateId (){ //to generate unique id
     return Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);
 }
@@ -121,97 +123,97 @@ const store = Redux.createStore(Redux.combineReducers({
 //create applyMiddleware as a 2nd Argument in the store state.
 
 
-store.subscribe(() => {
-    const { goals, todos } = store.getState()
+// store.subscribe(() => {
+//     const { goals, todos } = store.getState()
 
-    document.getElementById('goals').innerHTML= ''
-    document.getElementById('todos').innerHTML = ''
+//     document.getElementById('goals').innerHTML= ''
+//     document.getElementById('todos').innerHTML = ''
 
-    goals.forEach(addGoalToDOM)
-    todos.forEach(addTodoToDOM)
-})
-
-
-
-//3. DOM Code
-
-function addTodo () {
-    //Grab the value of input, empty the value of input, and Add-to dispatch
-    const input = document.getElementById('todo')
-    const name = input.value
-    input.value = ''
-
-    store.dispatch(addTodoAction({
-        name,
-        complete:false,
-        id: generateId()
-        //these all props are under name 'todo'
-    }))
-}
-
-
-function addGoal (){
-    //Grab the value of input, empty the value of input, and Add to dispatch
-    const input = document.getElementById('goal')
-    const name = input.value
-    input.value = ''
-
-    store.dispatch(addGoalAction({
-        id: generateId(),
-        name,
-    }))
-}
-
-
-//Attach addGoal() and addTodo() to buttons
-document.getElementById('todoBtn').addEventListener('click', addTodo)
-document.getElementById('goalBtn').addEventListener('click', addGoal)
-
-
-        //Function to create REMOVE Button -- read throu this
-        function createRemoveButton(onClick){
-            const removeBtn = document.createElement ('button')
-            removeBtn.innerHTML = 'x'
-            removeBtn.style.marginLeft = '30px'
-            removeBtn.addEventListener('click', onClick)
-            return removeBtn
-        }
+//     goals.forEach(addGoalToDOM)
+//     todos.forEach(addTodoToDOM)
+// })
 
 
 
-function addTodoToDOM(todo) {
-    const node = document.createElement('li')
-    const text = document.createTextNode(todo.name)
+// //3. DOM Code
 
-        const removeBtn = createRemoveButton(() => {
-            store.dispatch(removeTodoAction(todo.id))
-        })
+// function addTodo () {
+//     //Grab the value of input, empty the value of input, and Add-to dispatch
+//     const input = document.getElementById('todo')
+//     const name = input.value
+//     input.value = ''
 
-
-    node.appendChild(text)
-    node.appendChild(removeBtn)
-
-    node.style.textDecoration = todo.complete ? 'line-through' : 'none'
-
-    node.addEventListener('click', () => {
-        store.dispatch(toggleTodoAction(todo.id))
-    })
-
-    document.getElementById('todos').appendChild(node)
-}
+//     store.dispatch(addTodoAction({
+//         name,
+//         complete:false,
+//         id: generateId()
+//         //these all props are under name 'todo'
+//     }))
+// }
 
 
-function addGoalToDOM(goal){
-    const node = document.createElement('li')
-    const text = document.createTextNode(goal.name)
+// function addGoal (){
+//     //Grab the value of input, empty the value of input, and Add to dispatch
+//     const input = document.getElementById('goal')
+//     const name = input.value
+//     input.value = ''
 
-    const removeBtn = createRemoveButton(() => {
-        store.dispatch(removeGoalAction(goal.id))
-    })
+//     store.dispatch(addGoalAction({
+//         id: generateId(),
+//         name,
+//     }))
+// }
 
-    node.appendChild(text)
-    node.appendChild(removeBtn)
+
+// //Attach addGoal() and addTodo() to buttons
+// document.getElementById('todoBtn').addEventListener('click', addTodo)
+// document.getElementById('goalBtn').addEventListener('click', addGoal)
 
 
-    document.getElementById('goals').appendChild(node)
-}
+//         //Function to create REMOVE Button -- read throu this
+//         function createRemoveButton(onClick){
+//             const removeBtn = document.createElement ('button')
+//             removeBtn.innerHTML = 'x'
+//             removeBtn.style.marginLeft = '30px'
+//             removeBtn.addEventListener('click', onClick)
+//             return removeBtn
+//         }
+
+
+
+// function addTodoToDOM(todo) {
+//     const node = document.createElement('li')
+//     const text = document.createTextNode(todo.name)
+
+//         const removeBtn = createRemoveButton(() => {
+//             store.dispatch(removeTodoAction(todo.id))
+//         })
+
+
+//     node.appendChild(text)
+//     node.appendChild(removeBtn)
+
+//     node.style.textDecoration = todo.complete ? 'line-through' : 'none'
+
+//     node.addEventListener('click', () => {
+//         store.dispatch(toggleTodoAction(todo.id))
+//     })
+
+//     document.getElementById('todos').appendChild(node)
+// }
+
+
+// function addGoalToDOM(goal){
+//     const node = document.createElement('li')
+//     const text = document.createTextNode(goal.name)
+
+//     const removeBtn = createRemoveButton(() => {
+//         store.dispatch(removeGoalAction(goal.id))
+//     })
+
+//     node.appendChild(text)
+//     node.appendChild(removeBtn)
+
+
+//     document.getElementById('goals').appendChild(node)
+// }
