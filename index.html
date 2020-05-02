@@ -131,7 +131,11 @@
 
       render() {
         const { store } = this.props
-        const { todos, goals } = store.getState()
+        const { todos, goals, loading } = store.getState()
+
+        if (loading === true ) {
+          return <h2>Loading . . .</h2>
+        }
 
         return (
           <div>
