@@ -117,14 +117,26 @@
       componentDidMount () {
         const { store } = this.props
 
+      Promise.all([
+        API.fetchTodos(),
+        API.fetchGoals()
+      ]).then(([todos, goals]) => {
+        console.log('Todos', todos)
+        console.log('Goals', goals)
+      })
+
         store.subscribe(() => this.forceUpdate())
       }
+
+      
+
       render() {
         const { store } = this.props
         const { todos, goals } = store.getState()
 
         return (
           <div>
+
             <Todos todos={todos} store={this.props.store} />
             <Goals goals={goals} store={this.props.store} />
           </div>
