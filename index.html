@@ -42,15 +42,10 @@
       addItem = (e) => {
         e.preventDefault()
 
-        return API.saveTodo(this.input.value)
-          .then((todo)=> {
-            this.props.store.dispatch(addTodoAction(todo))
-            this.input.value = ''
-          })
-          .catch(()=> {
-            alert('Error in adding todo list, try again')
-            // this.input.value = '' 
-          })
+        this.props.store.dispatch(handleAddTodo(
+          this.input.value,
+          () => this.input.value = ''
+        ))
       }
 
       removeItem = (todo) => {

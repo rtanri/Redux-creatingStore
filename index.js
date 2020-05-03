@@ -54,6 +54,19 @@ function generateId () {
     }
   }
 
+  function handleAddTodo (name, cb){
+    return (dispatch) => {
+        return API.saveTodo(name)
+        .then((todo) => {
+          dispatch(addTodoAction(todo))
+          cb()
+        })
+        .catch(()=> {
+          alert('Error in adding todo list, try again')
+          // this.input.value = '' 
+        })
+    }
+  }
 
   function handleDeleteTodo (todo) {
     return (dispatch) => {
