@@ -133,8 +133,16 @@ function generateId () {
     return result
   }
 
+  // Thunk middleware
+  const thunk = (store) => (next) => (action) => {
+    if (typeof action === 'function' ){
+      return action(store.dispatch) 
+    } //if the action is a function, then we pass the 'store.dispatch', if not, just continue to next(action)
+    return next(action)
+  }
+
   const store = Redux.createStore(Redux.combineReducers({
     todos,
     goals,
     loading,
-  }), Redux.applyMiddleware(checker, logger))
+  }), Redux.applyMiddleware(thunk, checker, logger))
