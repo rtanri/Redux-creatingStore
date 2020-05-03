@@ -37,8 +37,21 @@
 
 
     class Todos extends React.Component {
+
+
       addItem = (e) => {
         e.preventDefault()
+
+        return API.saveTodo(this.input.value)
+          .then((todo)=> {
+            this.props.store.dispatch(addTodoAction(todo))
+            this.input.value = ''
+          })
+          .catch(()=> {
+            alert('Sorry there is an error, try again')
+          })
+
+
         const name = this.input.value
         this.input.value = ''
 
@@ -48,6 +61,9 @@
           id: generateId()
         }))
       }
+
+
+
       removeItem = (todo) => {
         this.props.store.dispatch(removeTodoAction(todo.id)) 
 
