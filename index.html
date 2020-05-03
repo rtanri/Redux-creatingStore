@@ -48,21 +48,10 @@
             this.input.value = ''
           })
           .catch(()=> {
-            alert('Sorry there is an error, try again')
+            alert('Error in adding todo list, try again')
+            // this.input.value = '' 
           })
-
-
-        const name = this.input.value
-        this.input.value = ''
-
-        this.props.store.dispatch(addTodoAction({
-          name,
-          complete: false,
-          id: generateId()
-        }))
       }
-
-
 
       removeItem = (todo) => {
         this.props.store.dispatch(removeTodoAction(todo.id)) 
@@ -108,16 +97,21 @@
 
 
     class Goals extends React.Component {
+      
       addItem = (e) => {
         e.preventDefault()
-        const name = this.input.value
-        this.input.value = ''
-
-        this.props.store.dispatch(addGoalAction({
-          id: generateId(),
-          name,
-        }))
+      
+        return API.saveGoal(this.input.value)
+          .then((goal) => {
+            this.props.store.dispatch(addGoalAction(goal))
+            this.input.value =''
+          })
+          .catch(() => {
+            alert('Error in adding goal, try again')
+          })
       }
+
+
       removeItem = (goal) => {
         this.props.store.dispatch(removeGoalAction(goal.id))
 
