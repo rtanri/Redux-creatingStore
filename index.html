@@ -38,7 +38,6 @@
 
     class Todos extends React.Component {
 
-
       addItem = (e) => {
         e.preventDefault()
 
@@ -54,13 +53,8 @@
       }
 
       removeItem = (todo) => {
-        this.props.store.dispatch(removeTodoAction(todo.id)) 
 
-        return API.deleteTodo(todo.id) //remove data from the database
-          .catch(() => {
-            this.props.store.dispatch(addTodoAction(todo))
-            alert('An error occurred, try delete again')
-          })
+        this.props.store.dispatch(handleDeleteTodo(todo))
         
       }
 

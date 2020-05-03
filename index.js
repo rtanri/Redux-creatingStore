@@ -54,6 +54,20 @@ function generateId () {
     }
   }
 
+
+  function handleDeleteTodo (todo) {
+    return (dispatch) => {
+      dispatch(removeTodoAction(todo.id)) 
+
+      return API.deleteTodo(todo.id) 
+        .catch(() => {
+          dispatch(addTodoAction(todo))
+          alert('An error occurred, try delete again')
+        })
+    }
+  }
+
+
   function todos (state = [], action) {
     switch(action.type) {
       case ADD_TODO :
