@@ -80,6 +80,18 @@ function generateId () {
     }
   }
 
+  function handleToggle (id) {
+    return (dispatch) => {
+      dispatch(toggleTodoAction(id))
+
+      return API.saveTodoToggle(id)
+        .catch(() => {
+          dispatch(toggleTodoAction(id))
+          alert('An error in toggling occured, try again')
+        })
+    }
+  }
+
   function handleAddGoal(name, cb){
     return (dispatch) => {
       return API.saveGoal(name)
@@ -90,6 +102,7 @@ function generateId () {
       .catch(() => { alert('Error in adding goal, try again')})
     }
   }
+  
 
   function handleDeleteGoal(goal){
     return(dispatch) => {
