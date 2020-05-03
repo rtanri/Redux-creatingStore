@@ -67,6 +67,28 @@ function generateId () {
     }
   }
 
+  function handleAddGoal(name, cb){
+    return (dispatch) => {
+      return API.saveGoal(name)
+      .then((goal) => {
+        dispatch(addGoalAction(goal))
+        cb() //callback function that is passed as 2nd argument
+      })
+      .catch(() => { alert('Error in adding goal, try again')})
+    }
+  }
+
+  function handleDeleteGoal(goal){
+    return(dispatch) => {
+      dispatch(removeGoalAction(goal.id))
+
+        return API.deleteGoal (goal.id)
+          .catch(()=> {
+            dispatch(addGoalAction(goal))
+            alert('An error is occurred, try again')
+          })
+    }
+  }
 
   function todos (state = [], action) {
     switch(action.type) {
@@ -145,4 +167,4 @@ function generateId () {
     todos,
     goals,
     loading,
-  }), Redux.applyMiddleware(thunk, checker, logger))
+  }), Redux.applyMiddleware(ReduxThunk.default, checker, logger))
