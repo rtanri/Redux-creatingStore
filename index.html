@@ -13,11 +13,9 @@
 
   <div id='app'></div>
   <hr style='line-height: 2rem; margin-right: 20%;'>
-  <div id='root'></div>
 
 
   <script type='text/javascript' src="index.js"></script>
-  <script type='text/javascript' src="connectProvider6.js"></script>
 
   <script type='text/babel'>
 
@@ -108,7 +106,6 @@
         ))
       }
 
-
       removeItem = (goal) => {
         this.props.dispatch(handleDeleteGoal(goal))
       }
@@ -125,7 +122,6 @@
             <button onClick={this.addItem}>Add Goal</button>
 
             <List
-              toggle={this.toggleItem}
               items={this.props.goals}
               remove={this.removeItem}
             />
@@ -134,14 +130,14 @@
       }
     }
 
-    class ConnectedGoal extends React.Component{
+    class ConnectedGoals extends React.Component{
       render() {
         return (
           <Context.Consumer>
             {(store) => {
               const { goals } = store.getState()
 
-              return <Goals goals={goals} dispatch={Store.dispatch} />
+              return <Goals goals={goals} dispatch={store.dispatch} />
             }}
           </Context.Consumer>
         )
@@ -155,7 +151,6 @@
         store.dispatch(handleInitialData())
         store.subscribe(() => this.forceUpdate())
       }
-
       render() {
         const { store } = this.props
         const { loading } = store.getState()
@@ -167,7 +162,6 @@
 
         return (
           <div>
-
             <ConnectedTodos />
             <ConnectedGoals />
             </div>
@@ -207,7 +201,5 @@
     )
 
   </script>
-
-
 </body>
 </html>
