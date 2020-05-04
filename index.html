@@ -83,6 +83,19 @@
     }
 
 
+    class ConnectedTodo extends React.Component{
+      render(){
+        return (
+          <Context.Consumer>
+            {(store) => {
+              
+            }}
+          </Context.Consumer>
+        )
+      }
+    }
+
+
     class Goals extends React.Component {
       
       addItem = (e) => {
@@ -119,6 +132,20 @@
       }
     }
 
+    class ConnectedGoal extends React.Component{
+      render() {
+        return (
+          <Context.Consumer>
+            {(store) => {
+              const { goals } = store.getState()
+
+              return <Goals goals={goals} dispatch={Store.dispatch} />
+            }}
+          </Context.Consumer>
+        )
+      }
+    }
+
 
     class App extends React.Component {
       componentDidMount () {
@@ -140,14 +167,22 @@
           <div>
 
             <Todos todos={todos} store={this.props.store} />
-            <Goals goals={goals} store={this.props.store} />
-          </div>
+            <ConnectedGoals />
+            </div>
         )
       }
     }
 
     class ConnectedApp extends React.Component {
-      
+      render() {
+        return (
+          <Context.Consumer>
+            {(store) => (
+              <App store ={store}/>
+            )}
+          </Context.Consumer>
+        )
+      }
     }
 
     const Context = React.createContext()
