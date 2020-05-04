@@ -159,7 +159,9 @@
     }
 
     ReactDOM.render(
-            <App store={store}/>, document.getElementById('app')
+      <Provider store={store}>
+        <App />
+      </Provider>, document.getElementById('app')
     )
 
   </script>
