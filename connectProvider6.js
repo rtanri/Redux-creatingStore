@@ -1,11 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+const Context = React.createContext() //2 property: provider & consumer
+
 function Parent ({ name }) {
   return (
     <div>
       <h1>Parent</h1>
-      <Child name={name}/>
+      <Child />
     </div>
   );
 }
@@ -14,7 +16,7 @@ function Child ({ name }) {
   return (
     <div>
       <h1>Child</h1>
-      <Grandchild name={name}/>
+      <Grandchild name={name} />
     </div>
   );
 }
@@ -33,9 +35,9 @@ class App extends React.Component {
     const name = 'Tyler';
 
     return (
-      <Parent />
+      <Parent name={name}/>
     );
   }
 }
 
-render(<App />, document.getElementById('app2'));
+render(<App />, document.getElementById('root'));
