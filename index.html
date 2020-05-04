@@ -47,18 +47,18 @@
       addItem = (e) => {
         e.preventDefault()
 
-        this.props.store.dispatch(handleAddTodo(
+        this.props.dispatch(handleAddTodo(
           this.input.value,
           () => this.input.value = ''
         ))
       }
 
       removeItem = (todo) => {
-        this.props.store.dispatch(handleDeleteTodo(todo))
+        this.props.dispatch(handleDeleteTodo(todo))
       }
 
       toggleItem = (id) => {
-        this.props.store.dispatch(handleToggle(id))
+        this.props.dispatch(handleToggle(id))
       }
 
       render() {
@@ -83,12 +83,14 @@
     }
 
 
-    class ConnectedTodo extends React.Component{
+    class ConnectedTodos extends React.Component{
       render(){
         return (
           <Context.Consumer>
             {(store) => {
-              
+              const {todos} = store.getState()
+
+              return <Todos Todos={todos} dispatch={store.dispatch} />
             }}
           </Context.Consumer>
         )
@@ -100,7 +102,7 @@
       
       addItem = (e) => {
         e.preventDefault()
-        this.props.store.dispatch(handleAddGoal(
+        this.props.dispatch(handleAddGoal(
           this.input.value,
           ()=> this.input.value = ''
         ))
@@ -108,7 +110,7 @@
 
 
       removeItem = (goal) => {
-        this.props.store.dispatch(handleDeleteGoal(goal))
+        this.props.dispatch(handleDeleteGoal(goal))
       }
     
       render() {
@@ -156,7 +158,7 @@
 
       render() {
         const { store } = this.props
-        const { todos, goals, loading } = store.getState()
+        const { loading } = store.getState()
 
         if (loading === true ) {
           return <h2>Loading . . .</h2>
@@ -166,7 +168,7 @@
         return (
           <div>
 
-            <Todos todos={todos} store={this.props.store} />
+            <ConnectedTodos />
             <ConnectedGoals />
             </div>
         )
