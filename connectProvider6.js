@@ -23,10 +23,14 @@ function Child ({ name }) {
 
 function Grandchild ({ name }) {
   return (
-    <div>
-      <h1>Grandchild</h1>
-      <h3>Name: {name}</h3>
-    </div>
+    <Context.Consumer>
+        {(name) => (
+          <div>
+            <h1>Grandchild</h1>
+            <h3>Name: {name}</h3>
+          </div>
+        )}
+    </Context.Consumer>
   );
 }
 
@@ -35,8 +39,10 @@ class App extends React.Component {
     const name = 'Tyler';
 
     return (
-      <Parent name={name}/>
-    );
+      <Context.Provider value={name}>
+        <Parent/>
+      </Context.Provider>
+    )
   }
 }
 
