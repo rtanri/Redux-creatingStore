@@ -152,19 +152,6 @@
     }))(App)
 
 
-        class ConnectedComponent extends React.Component {
-          render(){
-            return(
-              <Context.Consumer>
-                {(store) => <Receiver store={store}/>} 
-              </Context.Consumer>
-            )
-          }
-        }
-        return ConnectedComponent
-      }
-    }
-
 
 
     function connect (mapStateToProps){
@@ -189,20 +176,7 @@
           }
           }
         }
-        
-        class ConnectedComponent extends React.Component {
-          render() {
-            return (
-              <Context.Consumer>
-                {(store) => <Receiver store={store}/>}
-              </Context.Consumer>
-            )
-          }
-        }
 
-
-      return ConnectedComponent
-    }
 
     class Provider extends React.Component {
       render() {
