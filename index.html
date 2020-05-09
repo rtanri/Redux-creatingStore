@@ -82,7 +82,7 @@
     }
 
 
-    const ConnectedTodos = connect((state)=>({
+    const ConnectedTodos = ReactRedux.connect((state)=>({
       todos: state.todos
     }))(Todos)
 
@@ -175,24 +175,13 @@
             return <Component {...stateNeeded} dispatch={dispatch} />
           }
           }
-        }
-
-
-    class Provider extends React.Component {
-      render() {
-        return (
-          <Context.Provider value={this.props.store}>
-            {this.props.children}
-          </Context.Provider> 
-
-        )
       }
     }
 
     ReactDOM.render(
-      <Provider store={store}>
+      <ReactRedux.Provider store={store}>
         <ConnectedApp />
-      </Provider>, document.getElementById('app')
+      </ReactRedux.Provider>, document.getElementById('app')
     )
 
   </script>
